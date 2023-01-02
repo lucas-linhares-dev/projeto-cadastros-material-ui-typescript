@@ -4,7 +4,7 @@ import { Avatar, Divider, Drawer, Icon, ListItemButton, ListItemIcon, ListItemTe
 import { Box } from '@mui/system';
 import { useDrawerContext } from '../../contexts';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 
 
 
@@ -18,6 +18,9 @@ interface IListItemLink {
 
 const ListItemLink: React.FC<IListItemLink> = ({label, icon, to, onClick}) => {
 
+  const resolvedPath = useResolvedPath(to);
+  const match = useMatch({path: resolvedPath.pathname, end: false});
+
   const navigate = useNavigate();
 
   const handleClick = useCallback(() => {
@@ -27,7 +30,7 @@ const ListItemLink: React.FC<IListItemLink> = ({label, icon, to, onClick}) => {
 
 
   return(
-    <ListItemButton onClick={handleClick}>
+    <ListItemButton onClick={handleClick} selected={!!match}>
 
       <ListItemIcon>
         <Icon>{icon}</Icon>
