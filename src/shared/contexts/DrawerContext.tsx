@@ -2,8 +2,8 @@ import { useCallback, useState, useContext, createContext } from 'react';
 
 interface IDrawerContext {
     isDrawerOpen: boolean;
-    toggleDrawerOpen: () => void;
     drawerOptions: IDrawerOption[];
+    toggleDrawerOpen: () => void;
     setDrawerOptions: (newDrawerOptions: IDrawerOption[]) => void;
 }
 
@@ -13,6 +13,10 @@ interface IDrawerOption {
   icon: string;
 }
 
+interface IDrawerProvider {
+  children: React.ReactNode
+}
+
 const DrawerContext = createContext({} as IDrawerContext);
 
 
@@ -20,10 +24,6 @@ export const useDrawerContext = () => {
   return useContext(DrawerContext);
 };
 
-
-interface IDrawerProvider {
-    children: React.ReactNode
-}
 
 export const DrawerProvider: React.FC<IDrawerProvider> = ({children}) => {
 
