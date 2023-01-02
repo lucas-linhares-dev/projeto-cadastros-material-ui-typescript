@@ -44,11 +44,6 @@ const ListItemLink: React.FC<IListItemLink> = ({label, icon, to, onClick}) => {
 
 
 
-
-
-
-
-
 interface IMenuLateralProps {
   children: React.ReactNode
 }
@@ -58,7 +53,7 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
   const theme = useTheme();
   const downSM = useMediaQuery(theme.breakpoints.down('sm'));
   
-  const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
+  const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
 
 
   return(
@@ -77,13 +72,16 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
           
           <Box flex={1}> 
             <List component="nav">
-
-              <ListItemLink 
-                label= 'Página inicial'
-                icon= 'home'
-                to= '/pagina-inicial'
-                onClick={downSM ? toggleDrawerOpen : undefined}
-              />
+              {drawerOptions.map(drawerOption => (
+                <ListItemLink
+                  key = {drawerOption.path}
+                  label = {drawerOption.label}
+                  to = {drawerOption.path}
+                  icon = {drawerOption.icon}
+                  onClick = {downSM ? toggleDrawerOpen : undefined}
+                />
+              ))};
+              
 
             </List>
           </Box>
