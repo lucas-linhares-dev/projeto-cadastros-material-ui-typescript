@@ -3,6 +3,46 @@
 import { Avatar, Divider, Drawer, Icon, ListItemButton, ListItemIcon, ListItemText, useTheme , List, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDrawerContext } from '../../contexts';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
+
+interface IListItemLink {
+  label: string;
+  icon: string;
+  to: string;
+  onClick: (() => void) | undefined;
+}
+
+
+const ListItemLink: React.FC<IListItemLink> = ({label, icon, to, onClick}) => {
+
+  const navigate = useNavigate();
+
+  const handleClick = useCallback(() => {
+    navigate(to);
+    onClick?.();
+  }, []);
+
+
+  return(
+    <ListItemButton onClick={handleClick}>
+
+      <ListItemIcon>
+        <Icon>{icon}</Icon>
+      </ListItemIcon>
+
+      <ListItemText primary= {label}/>
+
+    </ListItemButton>
+  );
+};
+
+
+
+
+
 
 
 
@@ -35,15 +75,12 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
           <Box flex={1}> 
             <List component="nav">
 
-              <ListItemButton>
-
-                <ListItemIcon>
-                  <Icon>home</Icon>
-                </ListItemIcon>
-
-                <ListItemText primary= "Pagina inicial"/>
-
-              </ListItemButton>
+              <ListItemLink 
+                label= 'Página inicial'
+                icon= 'home'
+                to= '/pagina-inicial'
+                onClick={downSM ? toggleDrawerOpen : undefined}
+              />
 
             </List>
           </Box>
