@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 
 
 interface IThemeContextData {
-    themeName: 'light' | 'dark',
+    themeName: 'light' | 'dark';
     toggleTheme: () => void;
 }
 
