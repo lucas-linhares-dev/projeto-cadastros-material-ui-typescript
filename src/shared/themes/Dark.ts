@@ -1,8 +1,9 @@
-import { createTheme } from '@mui/material';
+import { createTheme, Typography } from '@mui/material';
 import { teal, indigo} from '@mui/material/colors';
 
 export const DarkTheme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: teal[600],
       dark: teal[800],
@@ -20,5 +21,10 @@ export const DarkTheme = createTheme({
       paper: '#303134'
     } 
 
+  },
+  typography: {
+    allVariants: {
+      color: 'white'
+    }
   }
 });
